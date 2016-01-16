@@ -5,9 +5,14 @@
   "description": "This extension will provide you with the link 
   to a gif based on the text you select",
   "version": "1.0",
+  "icons": { "16": "icon16.png",
+             "48": "icon48.png",
+             "128": "icon128.png" },
+  "locale": "en",
 
   "browser_action": {
    "default_icon": "icon.png",
+   "default_title": "GifIt2Me",
    "default_popup": "popup.html"
   },
   "permissions": [
