@@ -1,9 +1,9 @@
+var sel;
 document.addEventListener('DOMContentLoaded',function() {
 	chrome.windows.getCurrent(null, function(w) {
-		var text = w.getSelection().toString();
+		sel = w.getSelection().toString();
+		document.getElementById("text").innerHTML = sel;
+
 	});
-
-	document.getElementById("text").innerHTML = text;
-
 
 });
