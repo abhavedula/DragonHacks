@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded',function() {
 		var text = w.getSelection().toString();
 	})
 
-	document.getElementById("text").innerHTML = text;
+	document.getElementById("text").innerHTML = typeof text;
 
 
 }
