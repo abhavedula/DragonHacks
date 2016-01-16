@@ -1,9 +1,12 @@
 document.addEventListener('DOMContentLoaded',function() {
-	chrome.windows.getCurrent(null, function(w) {
-		var text = w.getSelection().toString();
-	})
 
-	document.getElementById("text").innerHTML = typeof text;
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, "");
+  });
 
+});
 
-}
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    document.getElementById("text").innerHTML = request.selection;
+});
