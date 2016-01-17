@@ -10,6 +10,7 @@ chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     //document.getElementById("text").innerHTML = request.selection;
     //copyToClipboard(request.selection);
+    document.getElementById("text").innerHTML = "text has been selected"
     copyToClipboard(giphy(getURL(request.selection))); 
 });
 
