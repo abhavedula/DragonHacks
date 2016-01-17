@@ -43,7 +43,7 @@ function getURL(text) {
 	var key = parse[0].textContent.split("/");
 	//document.write(key[key.length-1]);
 	// only take one word
-	return key[key.length-1];
+	return key[(key.length-1)/2];
 }
 
 
