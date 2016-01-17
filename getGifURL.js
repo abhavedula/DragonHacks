@@ -30,16 +30,16 @@ function giphy(key) {
 
 	var apiCall = "http://api.giphy.com/v1/gifs/search?q=";
 	
-	xhr.open("GET", apiCall  + key + "&apikey=" + apikey + "&limit=" + lim + "&fmt=" + fmt, false);
+	xhr.open("GET", apiCall  + key + "&api_key=" + apikey + "&limit=" + lim + "&fmt=" + fmt, false);
 	document.write(xhr.statusText);
-	xhr.setRequestHeader('Accept', 'application/json');
+	//xhr.setRequestHeader('Accept', 'application/json');
 	xhr.send();
-	document.write(xhr.responseText);
+	//document.write(xhr.responseText);
 	var gif = JSON.parse(xhr.responseText);
-	document.write(gif);
-	document.write("2");
+	var gifURL = gif.data[0].images.fixed_height.url;
+document.write(gifURL);
     
-	return gif;
+	return gifURL;
 }
 
 giphy("ferrari");
