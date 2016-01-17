@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded',function() {
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-    document.getElementById("text").innerHTML = request.selection;
+    //document.getElementById("text").innerHTML = request.selection;
     //copyToClipboard(request.selection);
     copyToClipboard(giphy(getURL(request.selection))); 
 });
@@ -57,8 +57,8 @@ function giphy(key) {
 	//document.write(xhr.responseText);
 	var gif = JSON.parse(xhr.responseText);
 	var gifURL = gif.data[0].images.fixed_height.url;
-	document.write(gifURL);
-    
+	//document.write(gifURL);
+    document.write("Gif url has been copied to your clipboard!");
 	return gifURL;
 }
 
