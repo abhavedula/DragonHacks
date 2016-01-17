@@ -25,7 +25,6 @@ chrome.runtime.onMessage.addListener(
 });
 
 function copyToClipboard(text) {
-	document.write("Gif url has been copied to your clipboard!");
   const input = document.createElement('input');
   input.style.position = 'fixed';
   input.style.opacity = 0;
@@ -89,7 +88,7 @@ function giphy(key) {
 	var gifURL = gif.data[0].images.fixed_height.url;
 	//document.write(1);
 	//document.write(gif);
-    //document.write("Gif url has been copied to your clipboard!");
+    document.write("<p>Gif url has been copied to your clipboard!</p>");
 	return gifURL;
 }
 
