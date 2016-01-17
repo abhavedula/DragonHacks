@@ -1,8 +1,3 @@
-
-
-var text;
-var keyLen;
-
 document.addEventListener('DOMContentLoaded',function() {
 
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
@@ -16,11 +11,10 @@ chrome.runtime.onMessage.addListener(
     //document.getElementById("text").innerHTML = request.selection;
     //copyToClipboard(request.selection);
     document.getElementById("text").innerHTML = "No gif was found";
-    text = request.selection;
-    var key = getURL(text);
-    // not executed if no gif
-    var gif = giphy(key);
-    copyToClipboard(gif);
+    var key = getURL(request.selection);
+     
+    	var gif = giphy(key);
+    	copyToClipboard(gif);
     
 });
 
@@ -33,11 +27,9 @@ function copyToClipboard(text) {
   input.select();
   document.execCommand('Copy');
   document.body.removeChild(input);
-
 };
 
-
-function getURL(text, i) {
+function getURL(text) {
 	var apikey = "c6e9079c85789eaf788aec678392451526d985f3";
 	var xhr = new XMLHttpRequest();
 
@@ -51,17 +43,10 @@ function getURL(text, i) {
 	var key = parse[0].textContent.split("/");
 	//document.write(key[key.length-1]);
 	// only take one word
-	//document.write(giphy(key[(key.length-1)/2]));
-	//document.write(giphy(key[(key.length-1)]));
-	keyLen = key.length;
-	return key[(keyLen - 1) - i];
-
-	
+	return key[(key.length-1)];
 }
 
-
 function giphy(key) {
-	var i = 0;
 	var apikey = "dc6zaTOxFJmzC";
 	var xhr = new XMLHttpRequest();
 	var lim = 1;
@@ -70,25 +55,13 @@ function giphy(key) {
 	var apiCall = "http://api.giphy.com/v1/gifs/search?q=";
 	
 	xhr.open("GET", apiCall  + key + "&api_key=" + apikey + "&limit=" + lim + "&fmt=" + fmt, false);
-	//document.write(1);
+	document.write(xhr.statusText);
 	//xhr.setRequestHeader('Accept', 'application/json');
 	xhr.send();
-
+	//document.write(xhr.responseText);
 	var gif = JSON.parse(xhr.responseText);
-
-
-	while ((gif == null || gif.data.length == 0) && i < keyLen){
-		i++;
-		key = getURL(text, i);
-		xhr.open("GET", apiCall  + key + "&api_key=" + apikey + "&limit=" + lim + "&fmt=" + fmt, false);
-		xhr.send();
-		gif = JSON.parse(xhr.responseText);
-	}
-
 	var gifURL = gif.data[0].images.fixed_height.url;
-	//document.write(1);
-	//document.write(gif);
-    document.write("<p>Gif url has been copied to your clipboard!</p>");
+	//document.write(gifURL);
+    document.write("Gif url has been copied to your clipboard!");
 	return gifURL;
 }
-
