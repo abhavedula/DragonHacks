@@ -3,29 +3,46 @@
 <head>
 <script type="text/javascript">
 
-var apikey = "c6e9079c85789eaf788aec678392451526d985f3";
-var xhr = new XMLHttpRequest();
-
-var apiCall = "https://gateway-a.watsonplatform.net/calls/text/TextGetRankedTaxonomy?apikey=";
-//var outputMode = "xml";
-var maxRetrieve = "3";
-
 function getURL(text) {
-xhr.open("GET", apiCall + apikey + "&text=" + text.replace(" ","%20") + "&maxRetrieve=" + maxRetrieve, false);
-//xhr.setRequestHeader('Content-Type', 'text/xml');
+	var apikey = "c6e9079c85789eaf788aec678392451526d985f3";
+	var xhr = new XMLHttpRequest();
 
-xhr.send();
+	var apiCall = "https://gateway-a.watsonplatform.net/calls/text/TextGetRankedTaxonomy?apikey=";
+	var maxRetrieve = "3";
+	xhr.open("GET", apiCall + apikey + "&text=" + text.replace(" ","%20") + "&maxRetrieve=" + maxRetrieve, false);
+	xhr.send();
 
-var apiResult = xhr.responseXML;
-//var parsed = (apiResult.childNodes['0'].textContent);
-var parse = apiResult.getElementsByTagName("label");
-var key = parse[0].textContent.split("/");
-document.write(key);
-
-return key;
+	var apiResult = xhr.responseXML;
+	var parse = apiResult.getElementsByTagName("label");
+	var key = parse[0].textContent.split("/");
+	//document.write(key[key.length-1]);
+	// only take one word
+	return key[key.length-1];
 }
 
 getURL("My favorite brands are BMW and Ferrari");
+
+function giphy(key) {
+	var apikey = "dc6zaTOxFJmzC";
+	var xhr = new XMLHttpRequest();
+	var lim = 1;
+	var fmt = "json";
+
+	var apiCall = "http://api.giphy.com/v1/gifs/search?q=";
+	
+	xhr.open("GET", apiCall  + key + "&apikey=" + apikey + "&limit=" + lim + "&fmt=" + fmt, false);
+	document.write(xhr.statusText);
+	xhr.setRequestHeader('Accept', 'application/json');
+	xhr.send();
+	document.write(xhr.responseText);
+	var gif = JSON.parse(xhr.responseText);
+	document.write(gif);
+	document.write("2");
+    
+	return gif;
+}
+
+giphy("ferrari");
 
 </script>
 </head>
